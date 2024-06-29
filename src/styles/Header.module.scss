@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 20px 10px;
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.0125rem;
+  }
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: rgba(217, 217, 217, 1);
+  }
+}

@@ -1,0 +1,106 @@
+@mixin afterItemStyle {
+  position: absolute;
+  bottom: 4px;
+  right: 13px;
+  font-size: 0.75rem;
+}
+
+.sideBar {
+  left: -30%;
+  width: 20%;
+  //height: calc(100vh - 70px);
+  height: calc(100vh - 170px);
+  padding: 50px 8px 20px 8px;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 5.5px 0 10.2px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  //background: url("../../public/images/SideBar.png") no-repeat;
+  transition: 1s all;
+
+  .sideBarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .itemContainer {
+      color: rgba(153, 153, 153, 1);
+      font-weight: 400;
+      letter-spacing: 0.015625rem;
+
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 53px;
+        border-radius: 10px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+        font-size: 1.125rem;
+      }
+
+      .temperature {
+        &:after {
+          @include afterItemStyle;
+          content: "℃";
+        }
+      }
+
+      .mileage {
+        &:after {
+          @include afterItemStyle;
+          content: "km";
+        }
+      }
+
+      .speed {
+        &:after {
+          @include afterItemStyle;
+          content: "km/h";
+        }
+      }
+
+      .oilStains {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 102px;
+
+        div {
+          color: black;
+          font-size: 2.2125rem;
+          font-weight: 700;
+
+          span {
+            font-size: 0.9375rem;
+          }
+        }
+      }
+
+      .itemName {
+        margin-top: 10px;
+        font-size: 0.75rem;
+      }
+
+      .oilStainsName {
+        color: black;
+        font-size: 0.9375rem;
+        font-weight: 700;
+      }
+    }
+
+    .homeIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 10px;
+      padding: 4px 0;
+      background-color: #4A4A4A;;
+      border-radius: 9999px;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.slide {
+  transform: translateX(130%);
+}
