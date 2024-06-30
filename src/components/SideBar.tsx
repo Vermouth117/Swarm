@@ -56,9 +56,6 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
               <span>％</span>
             </div>
           </div>
-          <div className={`${style.itemName} ${style.oilStainsName}`}>
-            OIL汚れ
-          </div>
         </div>
         <div className={style.itemContainer}>
           <div
