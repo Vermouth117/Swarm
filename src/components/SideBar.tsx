@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { SideBarProps } from "../models/SideBarProps.ts";
 import { carInfo, initialCarInfo } from "../models/carInfo.ts";
@@ -9,6 +10,7 @@ import OilStainsRipplesBig from "../../public/icons/OilStainsRipplesBig.svg?reac
 import OilStainsRipplesSmall from "../../public/icons/OilStainsRipplesSmall.svg?react";
 
 export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
+  const navigate = useNavigate();
   const [carInfo, setCarInfo] = useState<carInfo>(initialCarInfo);
 
   useEffect(() => {
@@ -46,7 +48,13 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
           </div>
           <div className={style.itemName}>走行距離</div>
         </div>
-        <div className={style.itemContainer} style={{ position: "relative" }}>
+        <div
+          className={style.itemContainer}
+          style={{ position: "relative" }}
+          onClick={() => {
+            navigate("/oilInfo", { state: { loggedIn: loggedIn } });
+          }}
+        >
           <div className={style.oilStains}>
             <OilStainsRipplesBig style={{ position: "absolute" }} />
             <OilStainsRipplesSmall style={{ position: "absolute" }} />
@@ -66,7 +74,13 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
           </div>
           <div className={style.itemName}>SPEED</div>
         </div>
-        <div className={style.homeIcon} onClick={() => setLoggedIn(false)}>
+        <div
+          className={style.homeIcon}
+          onClick={() => {
+            setLoggedIn(false);
+            navigate("/", { state: { loggedIn: false } });
+          }}
+        >
           <HomeIcon />
         </div>
       </section>

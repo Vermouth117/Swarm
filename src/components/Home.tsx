@@ -1,17 +1,20 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import Header from "./Header.tsx";
 import SideBar from "./SideBar.tsx";
 import style from "../styles/Home.module.scss";
 import RockIcon from "../../public/icons/Rock.svg?react";
 import RockRipplesIcon from "../../public/icons/RockRipples.svg?react";
 
 export default function Home() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [loggedIn, setLoggedIn] = useState(
+    location.state ? !!location.state.loggedIn : false,
+  );
 
   return (
     <section className={style.container}>
-      <Header />
       <SideBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <div className={`${style.greeting} ${loggedIn && style.fadeOut}`}>
         Hello
@@ -22,7 +25,10 @@ export default function Home() {
       <div
         className={`${style.rockIconContainer} ${loggedIn && style.fadeOut}`}
         style={{ position: "relative" }}
-        onClick={() => setLoggedIn(true)}
+        onClick={() => {
+          setLoggedIn(true);
+          navigate("/", { state: { loggedIn: true } });
+        }}
       >
         <RockRipplesIcon style={{ position: "absolute" }} />
         <RockIcon style={{ position: "absolute" }} />
