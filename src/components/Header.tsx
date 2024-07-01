@@ -1,5 +1,5 @@
 import style from "../styles/Header.module.scss";
-import CircleMenuIcon from "../../public/icons/CircleMenu.svg?react";
+import CircleMenuIcon from "../icons/CircleMenu.svg";
 
 export default function Header() {
   return (

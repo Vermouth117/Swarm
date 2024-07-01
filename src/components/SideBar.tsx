@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { SideBarProps } from "../models/SideBarProps.ts";
 import { carInfo, initialCarInfo } from "../models/carInfo.ts";
 import style from "../styles/SideBar.module.scss";
-import HomeIcon from "../../public/icons/Home.svg?react";
-import OilStainsBG from "../../public/icons/OilStainsBG.svg?react";
-import OilStainsRipplesBig from "../../public/icons/OilStainsRipplesBig.svg?react";
-import OilStainsRipplesSmall from "../../public/icons/OilStainsRipplesSmall.svg?react";
+import HomeIcon from "../icons/Home.svg";
+import OilStainsBG from "../icons/OilStainsBG.svg";
+import OilStainsRipplesBig from "../icons/OilStainsRipplesBig.svg";
+import OilStainsRipplesSmall from "../icons/OilStainsRipplesSmall.svg";
 
 export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
   const navigate = useNavigate();

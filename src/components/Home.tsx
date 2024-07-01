@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import SideBar from "./SideBar.tsx";
 import style from "../styles/Home.module.scss";
-import RockIcon from "../../public/icons/Rock.svg?react";
-import RockRipplesIcon from "../../public/icons/RockRipples.svg?react";
+import RockIcon from "../icons/Rock.svg";
+import RockRipplesIcon from "../icons/RockRipples.svg";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export default function Home() {
         <RockIcon style={{ position: "absolute" }} />
       </div>
       <img
-        src={"/images/PriusC.png"}
+        src={"PriusC.png"}
         alt={"PRIUS-Cの写真"}
         className={`${style.carImage} ${loggedIn && style.slide}`}
         style={{ position: "relative" }}
