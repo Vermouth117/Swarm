@@ -1,0 +1,41 @@
+@use "./function/mixin" as *;
+
+.container {
+  @include fade;
+  position: absolute;
+  top: calc(100vh - 80px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  padding: 40px;
+  color: black;
+  opacity: 0;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+
+    &[aria-selected=true] {
+      background-color: rgba(61, 57, 234, 1);
+      color: white;
+    }
+  }
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.borderTopOn {
+  border-top: 1px solid rgba(201, 201, 201, 1);
+}
+
+.borderTopOff {
+  border-top: 1px solid rgba(201, 201, 201, 0);
+}

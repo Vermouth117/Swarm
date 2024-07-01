@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import Footer from "./Footer.tsx";
 import SideBar from "./SideBar.tsx";
 import style from "../styles/Home.module.scss";
 import RockIcon from "../icons/Rock.svg";
@@ -33,12 +34,20 @@ export default function Home() {
         <RockRipplesIcon style={{ position: "absolute" }} />
         <RockIcon style={{ position: "absolute" }} />
       </div>
-      <img
-        src={"PriusC.png"}
-        alt={"PRIUS-Cの写真"}
-        className={`${style.carImage} ${loggedIn && style.slide}`}
+      <div
+        className={`
+          ${style.carImageContainer}
+          ${loggedIn && `${style.fadeIn} ${style.slide}`}
+        `}
         style={{ position: "relative" }}
-      />
+      >
+        <img
+          src={"src/images/PriusC.png"}
+          alt={"PRIUS-Cの写真"}
+          className={`${style.carImage}`}
+        />
+      </div>
+      <Footer />
     </section>
   );
 }

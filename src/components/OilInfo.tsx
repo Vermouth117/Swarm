@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   CartesianGrid,
   Line,
@@ -8,21 +7,12 @@ import {
   YAxis,
 } from "recharts";
 
+import Footer from "./Footer.tsx";
 import { initialOilInfo } from "../models/oilInfo.ts";
 
 export default function OilInfo() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
   return (
     <section>
-      <button
-        onClick={() => {
-          navigate("/", { state: { loggedIn: location.state.loggedIn } });
-        }}
-      >
-        戻る
-      </button>
       <LineChart
         width={window.innerWidth}
         height={300}
@@ -63,6 +53,7 @@ export default function OilInfo() {
         />
         <Tooltip />
       </LineChart>
+      <Footer />
     </section>
   );
 }
