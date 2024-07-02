@@ -2,7 +2,6 @@
 
 .container {
   @include fade;
-  position: absolute;
   top: calc(100vh - 80px);
   display: flex;
   justify-content: space-between;

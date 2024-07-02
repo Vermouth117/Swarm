@@ -17,6 +17,7 @@ export default function Footer() {
         ${location.state && location.state.loggedIn && style.fadeIn}
         ${location.pathname !== "/" ? style.borderTopOn : style.borderTopOff}
       `}
+      style={{ position: "absolute" }}
     >
       <div className={style.icon}>
         <HomeIcon
