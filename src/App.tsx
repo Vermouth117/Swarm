@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Map from "./components/Map.tsx";
+import Map from "./components/Maps/Map.tsx";
 import Home from "./components/Home.tsx";
 import Voice from "./components/Voice.tsx";
 import Header from "./components/Header.tsx";
