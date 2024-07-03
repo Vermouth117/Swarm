@@ -11,6 +11,7 @@ import OilStainsRipplesSmall from "../icons/OilStainsRipplesSmall.svg";
 
 export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
   const navigate = useNavigate();
+
   const [carInfo, setCarInfo] = useState<carInfo>(initialCarInfo);
 
   useEffect(() => {
@@ -50,9 +51,15 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
         </div>
         <div className={style.itemContainer} style={{ position: "relative" }}>
           <div className={style.oilStains}>
-            <OilStainsRipplesBig style={{ position: "absolute" }} />
-            <OilStainsRipplesSmall style={{ position: "absolute" }} />
-            <OilStainsBG style={{ position: "absolute" }} />
+            <div style={{ position: "absolute" }}>
+              <OilStainsRipplesBig />
+            </div>
+            <div style={{ position: "absolute" }}>
+              <OilStainsRipplesSmall />
+            </div>
+            <div style={{ position: "absolute" }}>
+              <OilStainsBG />
+            </div>
             <div style={{ position: "absolute" }}>
               {carInfo.oilStains}
               <span>％</span>

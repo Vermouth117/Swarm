@@ -31,8 +31,12 @@ export default function Home() {
           navigate("/", { state: { loggedIn: true } });
         }}
       >
-        <RockRipplesIcon style={{ position: "absolute" }} />
-        <RockIcon style={{ position: "absolute" }} />
+        <div style={{ position: "absolute" }}>
+          <RockRipplesIcon />
+        </div>
+        <div style={{ position: "absolute" }}>
+          <RockIcon />
+        </div>
       </div>
       <div
         className={`
@@ -42,7 +46,7 @@ export default function Home() {
         style={{ position: "relative" }}
       >
         <img
-          src={"src/images/PriusC.png"}
+          src={"/images/PriusC.png"}
           alt={"PRIUS-Cの写真"}
           className={`${style.carImage}`}
         />

@@ -19,47 +19,47 @@ export default function Footer() {
       `}
       style={{ position: "absolute" }}
     >
-      <div className={style.icon}>
-        <HomeIcon
-          style={location.pathname === "/" ? { opacity: 0 } : { opacity: 1 }}
-          onClick={() => {
-            navigate("/", { state: { loggedIn: location.state.loggedIn } });
-          }}
-        />
+      <div
+        className={style.icon}
+        style={location.pathname === "/" ? { opacity: 0 } : { opacity: 1 }}
+        onClick={() => {
+          navigate("/", { state: { loggedIn: location.state.loggedIn } });
+        }}
+      >
+        <HomeIcon />
       </div>
-
       <div
         className={style.icon}
         aria-selected={location.pathname === "/oilInfo"}
+        onClick={() => {
+          navigate("/oilInfo", {
+            state: { loggedIn: location.state.loggedIn },
+          });
+        }}
       >
-        <GraphIcon
-          onClick={() => {
-            navigate("/oilInfo", {
-              state: { loggedIn: location.state.loggedIn },
-            });
-          }}
-        />
+        <GraphIcon />
       </div>
-      <div className={style.icon} aria-selected={location.pathname === "/map"}>
-        <DestinationIcon
-          onClick={() => {
-            navigate("/map", {
-              state: { loggedIn: location.state.loggedIn },
-            });
-          }}
-        />
+      <div
+        className={style.icon}
+        aria-selected={location.pathname === "/map"}
+        onClick={() => {
+          navigate("/map", {
+            state: { loggedIn: location.state.loggedIn },
+          });
+        }}
+      >
+        <DestinationIcon />
       </div>
       <div
         className={style.icon}
         aria-selected={location.pathname === "/voice"}
+        onClick={() => {
+          navigate("/voice", {
+            state: { loggedIn: location.state.loggedIn },
+          });
+        }}
       >
-        <MicrophoneIcon
-          onClick={() => {
-            navigate("/voice", {
-              state: { loggedIn: location.state.loggedIn },
-            });
-          }}
-        />
+        <MicrophoneIcon />
       </div>
     </footer>
   );

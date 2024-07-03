@@ -6,7 +6,12 @@ export default function Header() {
     <header className={style.container}>
       <CircleMenuIcon />
       <h1>TOYOTA</h1>
-      <div className={style.circle}></div>
+      <div
+        className={style.circle}
+        style={{
+          background: `url("/images/accountImage.png") no-repeat center bottom`,
+        }}
+      ></div>
     </header>
   );
 }
