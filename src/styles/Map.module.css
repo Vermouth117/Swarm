@@ -23,7 +23,7 @@
 }
 
 .searchboxArea > label > input {
-    background-color: rgb(65, 65, 65);
+    background-color: rgb(65, 65, 65) !important;
     color: white;
     height: 100%;
     width: 90%;

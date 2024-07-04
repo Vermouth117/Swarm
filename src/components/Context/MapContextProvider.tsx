@@ -6,30 +6,35 @@ export type MapContextType = Readonly<{
     setMap: React.Dispatch<React.SetStateAction<google.maps.Map | undefined>>
     places: google.maps.places.PlacesService | undefined
     setPlaces: React.Dispatch<React.SetStateAction<google.maps.places.PlacesService | undefined>>
-    latlang: {lat:number,lng:number}
+    latlng: {lat:number,lng:number}
+    destination: {flag:boolean,latlng:{lat:number,lng:number}}
+    setDestination: React.Dispatch<React.SetStateAction<{flag:boolean,latlng:{lat:number,lng:number}}>>
 }>;
 
-export const MapContext = createContext<any>({
+export const MapContext = createContext<MapContextType>({
     map: undefined,
     setMap: ()=>{},
     places: undefined,
     setPlaces: ()=>{},
-    latlang: {lat:35.170915,lng:136.881537}
+    latlng: {lat:35.170915,lng:136.881537},
+    destination: {flag:false,latlng:{lat:35.170915,lng:136.881537}},
+    setDestination: ()=>{},
 });
 
 export const MapContextProvider:React.FC<Props> = ({children}) => {
     const [map, setMap] = useState<google.maps.Map>();
     const [places, setPlaces] = useState<google.maps.places.PlacesService>();
-    const [latlang, setLatLang] = useState({lat:35.170915,lng:136.881537});
+    const [latlng, setLatLng] = useState({lat:35.170915,lng:136.881537});
+    const [destination, setDestination] = useState({flag:false,latlng:{lat:35.170915,lng:136.881537}});
 
     useEffect(()=>{
         navigator.geolocation.getCurrentPosition(
-            position=>setLatLang({lat: position.coords.latitude,lng: position.coords.longitude}),
-            _=>setLatLang({lat:35.170915,lng:136.881537})
-        )
+            position=>setLatLng({lat: position.coords.latitude,lng: position.coords.longitude}),
+            _=>setLatLng({lat:35.170915,lng:136.881537})
+        );
     },[]);
 
-    const value = { map, setMap, places, setPlaces, latlang }
+    const value = { map, setMap, places, setPlaces, latlng, destination, setDestination }
 
     return (
         <MapContext.Provider value={value}>
