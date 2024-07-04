@@ -22,11 +22,12 @@ export default function MapComponent () {
     });
 
     return (
-        <>
-        { isLoaded && 
+    <>
+    { isLoaded && 
         <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlang} options={options} >
+            
         </GoogleMap>
-        }
-        </>
+    }
+    </>
     )
 }

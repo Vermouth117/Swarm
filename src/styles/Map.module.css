@@ -11,7 +11,7 @@
     margin-top: 8px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: 5center;
 }
 
 .searchboxArea > label {
@@ -35,4 +35,11 @@
 
 .searchboxArea > label > input:focus {
     outline: none;
+}
+
+.searchboxX {
+    position: absolute;
+    top: 11px;
+    right: calc(5% + 12px);
+    cursor: pointer;
 }
