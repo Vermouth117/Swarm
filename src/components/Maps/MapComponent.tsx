@@ -4,6 +4,12 @@ import { MapContext } from "../Context/MapContextProvider";
 
 const mapStyle = {width: "100%", height: "100%"};
 export const libraries:Libraries = (['places','visualization']);
+export const options:google.maps.MapOptions = {
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    zoomControl:false
+}
 
 export default function MapComponent () {
     const { latlang } = useContext(MapContext);
@@ -18,7 +24,7 @@ export default function MapComponent () {
     return (
         <>
         { isLoaded && 
-        <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlang} >
+        <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlang} options={options} >
         </GoogleMap>
         }
         </>

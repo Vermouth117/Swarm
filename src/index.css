@@ -8,3 +8,7 @@
 html, body {
   overflow: hidden;
 }
+
+.gmnoprint {
+  display: none;
+}
