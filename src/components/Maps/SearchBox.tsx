@@ -7,11 +7,12 @@ export default function SearchBox () {
     const { map, setDestination } = useContext(MapContext);
 
     const searech = ()=>{
+        setDestination(prev=>({...prev,flag:false}))
         const geocoder = new google.maps.Geocoder();
         geocoder.geocode({ address: inputText}).then(res=>{
-            const lat = res.results[0].geometry.location.lat()
-            const lng = res.results[0].geometry.location.lng()
-            setDestination({flag:true, latlng:{lat,lng}});
+            const lat = res.results[0].geometry.location.lat();
+            const lng = res.results[0].geometry.location.lng();
+            setDestination({flag:true, latlng:{lat:lat,lng:lng}});
             map!.setCenter({lat,lng});
         }).catch(_=>alert("目的地が見つかりません"));
     };
@@ -24,7 +25,10 @@ export default function SearchBox () {
             </label>
             {inputText.length!==0
                 ? <img src="/icons/search.svg" alt="search" className={styles.searchboxX} onClick={searech}/>
-                : <img src="/icons/X.svg" alt="X" className={styles.searchboxX} onClick={_=>{setInputText("");setDestination((prev:any)=>({...prev,flag:false}))}}/>
+                : <img src="/icons/X.svg" alt="X" className={styles.searchboxX} onClick={_=>{
+                    setInputText("");
+                    setDestination(prev=>({...prev,flag:false}))}
+                  }/>
             }
         </section>    
     )

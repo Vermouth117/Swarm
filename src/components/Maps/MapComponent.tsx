@@ -14,7 +14,7 @@ export const options:google.maps.MapOptions = {
 }
 
 export default function MapComponent () {
-    const { setMap, latlng, destination } = useContext(MapContext);
+    const { setMap, latlng } = useContext(MapContext);
 
     const { isLoaded } = useJsApiLoader({
         id: "google-map",
@@ -28,8 +28,8 @@ export default function MapComponent () {
     { 
         isLoaded && 
             <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlng} options={options} onLoad={map=>setMap(map)} >
-                <MarkerF position={latlng} icon={startMarkerProp} />
-                {destination["flag"] && <Directions />}
+                {isLoaded && <MarkerF position={latlng} icon={{...startMarkerProp, scaledSize: new google.maps.Size(40, 40)}} />}
+                {isLoaded && <Directions isLoaded={isLoaded}/>}
             </GoogleMap>
     }
     </>
