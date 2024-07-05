@@ -1,12 +1,20 @@
-import { GoogleMap, useJsApiLoader, Libraries } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, MarkerF, Libraries } from "@react-google-maps/api";
 import { useContext } from "react";
 import { MapContext } from "../Context/MapContextProvider";
+import { startMarkerProp } from "../../models/mapIcons";
+import Directions from "./Directions";
 
 const mapStyle = {width: "100%", height: "100%"};
 export const libraries:Libraries = (['places','visualization']);
+export const options:google.maps.MapOptions = {
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    zoomControl:false
+}
 
 export default function MapComponent () {
-    const { latlang } = useContext(MapContext);
+    const { setMap, latlng } = useContext(MapContext);
 
     const { isLoaded } = useJsApiLoader({
         id: "google-map",
@@ -16,11 +24,14 @@ export default function MapComponent () {
     });
 
     return (
-        <>
-        { isLoaded && 
-        <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlang} >
-        </GoogleMap>
-        }
-        </>
+    <>
+    { 
+        isLoaded && 
+            <GoogleMap mapContainerStyle={mapStyle} zoom={15} center={latlng} options={options} onLoad={map=>setMap(map)} >
+                {isLoaded && <MarkerF position={latlng} icon={{...startMarkerProp, scaledSize: new google.maps.Size(40, 40)}} />}
+                {isLoaded && <Directions isLoaded={isLoaded}/>}
+            </GoogleMap>
+    }
+    </>
     )
 }

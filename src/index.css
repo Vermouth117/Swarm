@@ -8,3 +8,18 @@
 html, body {
   overflow: hidden;
 }
+
+.gmnoprint {
+  display: none;
+}
+
+input:-internal-autofill-selected {
+  background-color: rgb(65, 65, 65);
+  color: white;
+  height: 100%;
+  width: 90%;
+  border-radius: 3rem;
+  border: none;
+  padding: 0 48px;
+  font-size: 16px;
+}
