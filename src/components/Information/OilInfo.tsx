@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
-import { initialOilInfoOfHalfYear, oilInfo, oilInfoOfYear } from "../../models/oilInfo.ts";
+import { initialOilInfoOfHalfYear, oilInfo } from "../../models/oilInfo.ts";
 import Footer from "../Footer.tsx";
 import style from "../../styles/OilInfo.module.scss";
 import TriangleIcon from "../../icons/Triangle.svg";
@@ -22,31 +22,23 @@ export default function OilInfo() {
     <section className={style.container}>
       {flag
       ? <>
-        <div
-          className={style.backButtonContainer}
-          style={{ position: "absolute" }}
-          onClick={_ => setFlag(true)}
-          >
+        <div className={style.backButtonContainer} style={{ position: "absolute" }} onClick={_ => setFlag(false)}>
           <ChevronLeftIcon />
           <div className={style.backButton}>Oil Deterioration</div>
         </div>
         <RealTime />
         </>
       : <>
-        <div
-          className={style.backButtonContainer}
-          style={{ position: "absolute" }}
-          // onClick={() => {navigate("/", { state: { loggedIn: location.state.loggedIn } })}}
-          onClick={_ => setFlag(true)}
-          >
+        <div className={style.backButtonContainer} style={{ position: "absolute" }} onClick={_ => setFlag(true)} >
+          {/* onClick={() => {navigate("/", { state: { loggedIn: location.state.loggedIn } })}}  */}
           <ChevronLeftIcon />
           <div className={style.backButton}>Monitorring</div>
         </div>
         <div className={style.periodContainer}>
           <SelectPeriod period={"Real Time"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
-          <SelectPeriod period={"Month"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
+          <SelectPeriod period={"Month"}     isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
           <SelectPeriod period={"Half Year"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
-          <SelectPeriod period={"Year"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
+          <SelectPeriod period={"Year"}      isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
         </div>
         <LineChart
           width={window.innerWidth}

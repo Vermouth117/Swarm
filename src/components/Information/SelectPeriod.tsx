@@ -1,5 +1,5 @@
 import style from "../../styles/OilInfo.module.scss";
-import { initialOilInfoOfHalfYear, oilInfo, oilInfoOfYear } from "../../models/oilInfo.ts";
+import { initialOilInfoOfHalfYear, oilInfo } from "../../models/oilInfo.ts";
 
 export type props = {
     period:string
