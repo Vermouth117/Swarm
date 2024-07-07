@@ -11,25 +11,37 @@ import SelectPeriod from "./SelectPeriod.tsx";
 import RealTime from "./RealTime.tsx";
 
 export default function OilInfo() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const [isSelectedPeriod, setIsSelectedPeriod] = useState<string>("Half Year");
   const [oilInfo, setOilInfo] = useState<oilInfo[]>(initialOilInfoOfHalfYear);
+  const [flag, setFlag] = useState(false)
 
   return (
     <section className={style.container}>
-      <div
-        className={style.backButtonContainer}
-        style={{ position: "absolute" }}
-        onClick={() => {navigate("/", { state: { loggedIn: location.state.loggedIn } })}}>
-        <ChevronLeftIcon />
-        <div className={style.backButton}>Oil Deterioration</div>
-      </div>
-
-      {true
-      ? <RealTime />
+      {flag
+      ? <>
+        <div
+          className={style.backButtonContainer}
+          style={{ position: "absolute" }}
+          onClick={_ => setFlag(true)}
+          >
+          <ChevronLeftIcon />
+          <div className={style.backButton}>Oil Deterioration</div>
+        </div>
+        <RealTime />
+        </>
       : <>
+        <div
+          className={style.backButtonContainer}
+          style={{ position: "absolute" }}
+          // onClick={() => {navigate("/", { state: { loggedIn: location.state.loggedIn } })}}
+          onClick={_ => setFlag(true)}
+          >
+          <ChevronLeftIcon />
+          <div className={style.backButton}>Monitorring</div>
+        </div>
         <div className={style.periodContainer}>
           <SelectPeriod period={"Real Time"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
           <SelectPeriod period={"Month"} isSelectedPeriod={isSelectedPeriod} setIsSelectedPeriod={setIsSelectedPeriod} setOilInfo={setOilInfo} />
