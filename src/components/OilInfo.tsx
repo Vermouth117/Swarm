@@ -9,8 +9,12 @@ import {
   YAxis,
 } from "recharts";
 
+import {
+  initialOilInfoOfHalfYear,
+  oilInfo,
+  oilInfoOfYear,
+} from "../models/oilInfo.ts";
 import Footer from "./Footer.tsx";
-import { initialOilInfo } from "../models/oilInfo.ts";
 import style from "../styles/OilInfo.module.scss";
 import TriangleIcon from "../icons/Triangle.svg";
 import ChevronLeftIcon from "../icons/ChevronLeft.svg";
@@ -19,7 +23,8 @@ export default function OilInfo() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isSelectedPeriod, setIsSelectedPeriod] = useState("Half Year");
+  const [isSelectedPeriod, setIsSelectedPeriod] = useState<string>("Half Year");
+  const [oilInfo, setOilInfo] = useState<oilInfo[]>(initialOilInfoOfHalfYear);
 
   return (
     <section className={style.container}>
@@ -38,28 +43,40 @@ export default function OilInfo() {
       <div className={style.periodContainer}>
         <div
           className={style.underline}
-          onClick={() => setIsSelectedPeriod("Week")}
+          onClick={() => {
+            setIsSelectedPeriod("Week");
+            setOilInfo(initialOilInfoOfHalfYear);
+          }}
           aria-selected={isSelectedPeriod === "Week"}
         >
           Week
         </div>
         <div
           className={style.underline}
-          onClick={() => setIsSelectedPeriod("Month")}
+          onClick={() => {
+            setIsSelectedPeriod("Month");
+            setOilInfo(oilInfoOfYear);
+          }}
           aria-selected={isSelectedPeriod === "Month"}
         >
           Month
         </div>
         <div
           className={style.underline}
-          onClick={() => setIsSelectedPeriod("Half Year")}
+          onClick={() => {
+            setIsSelectedPeriod("Half Year");
+            setOilInfo(initialOilInfoOfHalfYear);
+          }}
           aria-selected={isSelectedPeriod === "Half Year"}
         >
           Half Year
         </div>
         <div
           className={style.underline}
-          onClick={() => setIsSelectedPeriod("Year")}
+          onClick={() => {
+            setIsSelectedPeriod("Year");
+            setOilInfo(oilInfoOfYear);
+          }}
           aria-selected={isSelectedPeriod === "Year"}
         >
           Year
@@ -68,7 +85,7 @@ export default function OilInfo() {
       <LineChart
         width={window.innerWidth}
         height={window.innerHeight - 93 - 81 - 60 - 16 - 60 - 16 - 30}
-        data={initialOilInfo}
+        data={oilInfo}
         margin={{
           left: 20,
           right: 20,
@@ -77,7 +94,7 @@ export default function OilInfo() {
       >
         <XAxis
           dataKey="date"
-          interval={4}
+          interval={Math.round(oilInfo.length / 7)}
           padding={{ left: 20, right: -25 }}
           tickLine={false}
           tick={{ stroke: "#6C6C6C", strokeWidth: 0.5, fontSize: 13 }}
@@ -119,8 +136,18 @@ export default function OilInfo() {
           unit={"%"}
         />
       </LineChart>
-      <div className={style.pointContainer} style={{ position: "absolute" }}>
-        <div>Sep</div>
+      <div
+        className={`
+            ${style.pointContainer}
+            ${(isSelectedPeriod === "Year" || isSelectedPeriod === "Month") && style.pointContainerOfYear}
+          `}
+        style={{ position: "absolute" }}
+      >
+        <div>
+          {isSelectedPeriod === "Half Year" || isSelectedPeriod === "Week"
+            ? "Sep"
+            : "Oct"}
+        </div>
         <TriangleIcon />
       </div>
       <Footer />
