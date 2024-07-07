@@ -1,4 +1,4 @@
-@use "./function/mixin" as *;
+@use "functions/mixin" as *;
 
 .container {
   @include fade;

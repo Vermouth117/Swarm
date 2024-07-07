@@ -69,7 +69,7 @@ export const connectToELM327 = async (
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
         const maf = (256 * A + B) / 100; // 質量空気流量センサー（MAF）空気流量 g/s
-        setFuelConsumption(((maf / 14.7 / 0.745) * 3600) / 1000); // 燃料消費率 L/h
+        setFuelConsumption((((maf / 14.7 / 0.745) * 3600) / 1000).toFixed(2)); // 燃料消費率 L/h
       }
 
       if (value.includes("41 A6")) {
