@@ -1,0 +1,15 @@
+@use "./function/mixin" as *;
+
+.iframeContainer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.iframeContent{
+  width: 100%;
+  height: 580px;
+  //top: 45%;
+  //left: 50%;
+}
