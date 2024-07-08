@@ -1,12 +1,14 @@
+import { Dispatch, SetStateAction } from "react";
+
 export const connectToELM327 = async (
-  setDevice,
-  setRpm,
-  setWaterTemp,
-  setOilTemp,
-  setOutsideTemp,
-  setFuelConsumption,
-  setOdo,
-  setSpeed,
+  setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>,
+  setRpm: Dispatch<SetStateAction<number | undefined>>,
+  setWaterTemp: Dispatch<SetStateAction<number | undefined>>,
+  setOilTemp: Dispatch<SetStateAction<number | undefined>>,
+  setOutsideTemp: Dispatch<SetStateAction<number | undefined>>,
+  setFuelConsumption: Dispatch<SetStateAction<number | undefined>>,
+  setOdo: Dispatch<SetStateAction<number | undefined>>,
+  setSpeed: Dispatch<SetStateAction<number | undefined>>,
 ) => {
   try {
     const ELM327 = await navigator.bluetooth.requestDevice({
@@ -69,7 +71,9 @@ export const connectToELM327 = async (
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
         const maf = (256 * A + B) / 100; // 質量空気流量センサー（MAF）空気流量 g/s
-        setFuelConsumption((((maf / 14.7 / 0.745) * 3600) / 1000).toFixed(2)); // 燃料消費率 L/h
+        setFuelConsumption(
+          Number((((maf / 14.7 / 0.745) * 3600) / 1000).toFixed(2)), // 燃料消費率 L/h
+        );
       }
 
       if (value.includes("41 A6")) {
@@ -94,9 +98,9 @@ export const connectToELM327 = async (
   }
 };
 
-export const sendCommand = async (device, command) => {
+export const sendCommand = async (device: BluetoothDevice, command: string) => {
   try {
-    const service = await device.gatt.getPrimaryService(0xfff0);
+    const service = await device.gatt!.getPrimaryService(0xfff0);
     const characteristic = await service.getCharacteristic(0xfff1);
     await characteristic.writeValue(new TextEncoder().encode(command)); // UTF-8 でエンコードされたテキストを含む Uint8Array を返す
   } catch (error) {
