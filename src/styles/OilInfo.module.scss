@@ -54,7 +54,7 @@
   }
 
   .pointContainerOfYear {
-    left: 69.5%;
+    left: 69.3%;
   }
 }
 
@@ -71,14 +71,14 @@
   grid-auto-rows: 100px;
   row-gap: 40px;
   column-gap: 12px;
-  padding: 12px ;
+  padding: 12px;
 }
 
 .RealTimeCard {
   width: 100%;
   height: 100%;
   background: #FFFFFF;
-  box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 0 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -88,8 +88,6 @@
 }
 
 .RealTimeCardTitle, .RealTimeCardUnit {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 700;
   font-size: 12.5698px;
   line-height: 15px;
@@ -97,8 +95,6 @@
 }
 
 .RealTimeCardValue {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 40px;
   line-height: 60px;
@@ -109,6 +105,7 @@
   transform: rotate(180deg);
   position: absolute;
   right: 8px;
+
   img {
     width: 7px;
   }

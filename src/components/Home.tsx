@@ -19,23 +19,17 @@ export default function Home() {
   //   setDevice,
   //   rpm,
   //   setRpm,
+  //   speed,
+  //   setSpeed,
   //   waterTemp,
   //   setWaterTemp,
-  //   oilTemp,
-  //   setOilTemp,
   //   outsideTemp,
   //   setOutsideTemp,
   //   fuelConsumption,
   //   setFuelConsumption,
   //   odo,
   //   setOdo,
-  //   speed,
-  //   setSpeed,
   // } = useContext(CarInfoContext);
-  //
-  // useEffect(() => {
-  //   device && setInterval(() => sendCommand(device, "010C"), 1000);
-  // }, [device]);
 
   return (
     <section className={style.container}>
@@ -49,12 +43,11 @@ export default function Home() {
       {/*        connectToELM327(*/}
       {/*          setDevice,*/}
       {/*          setRpm,*/}
+      {/*          setSpeed,*/}
       {/*          setWaterTemp,*/}
-      {/*          setOilTemp,*/}
       {/*          setOutsideTemp,*/}
       {/*          setFuelConsumption,*/}
       {/*          setOdo,*/}
-      {/*          setSpeed,*/}
       {/*        )*/}
       {/*      }*/}
       {/*    >*/}
@@ -65,19 +58,16 @@ export default function Home() {
       {/*    エンジン回転数*/}
       {/*  </button>*/}
       {/*  {rpm && <div>Engine RPM: {rpm}</div>}*/}
+      {/*  <button onClick={() => sendCommand(device, "010D")}>スピード</button>*/}
+      {/*  <div>Speed: {speed}</div>*/}
       {/*  <button onClick={() => sendCommand(device, "0105")}>水温</button>*/}
       {/*  {waterTemp && <div>水温: {waterTemp}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "015C")}>油温</button>*/}
-      {/*  {oilTemp && <div>油温: {waterTemp}</div>}*/}
       {/*  <button onClick={() => sendCommand(device, "0146")}>外気温</button>*/}
       {/*  {outsideTemp && <div>外気温: {outsideTemp}</div>}*/}
-      {/*  /!*<button onClick={() => sendCommand(device, "015E")}>燃料消費量</button>*!/*/}
       {/*  <button onClick={() => sendCommand(device, "0110")}>燃料消費量</button>*/}
       {/*  {fuelConsumption && <div>燃料消費量: {fuelConsumption}</div>}*/}
       {/*  <button onClick={() => sendCommand(device, "01A6")}>走行距離</button>*/}
       {/*  {odo && <div>ODO: {odo}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "010D")}>スピード</button>*/}
-      {/*  <div>Speed: {speed}</div>*/}
       {/*</div>*/}
       <SideBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <div className={`${style.greeting} ${loggedIn && style.fadeOut}`}>

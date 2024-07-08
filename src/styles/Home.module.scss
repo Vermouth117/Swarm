@@ -37,7 +37,8 @@
     transition: 1s all;
 
     .carImage {
-      width: 100%;
+      width: 80%; // iPhone11
+      //width: 80%; // iPhone10, 12, 14Max
     }
 
     &:before {
@@ -60,6 +61,7 @@
   }
 
   .slide {
-    transform: translate(170px, -190px);
+    transform: translate(170px, -250px); // iPhone11
+    //transform: translate(170px, -190px); // iPhone10, 12, 14Max
   }
 }

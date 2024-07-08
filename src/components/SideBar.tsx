@@ -60,7 +60,10 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             <div style={{ position: "absolute" }}>
               <OilStainsBG />
             </div>
-            <div style={{ position: "absolute" }}>
+            <div
+              className={style.oilStainsNum}
+              style={{ position: "absolute" }}
+            >
               {carInfo.oilStains}
               <span>％</span>
             </div>

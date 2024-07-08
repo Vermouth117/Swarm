@@ -3,12 +3,11 @@ import { Dispatch, SetStateAction } from "react";
 export const connectToELM327 = async (
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>,
   setRpm: Dispatch<SetStateAction<number | undefined>>,
+  setSpeed: Dispatch<SetStateAction<number | undefined>>,
   setWaterTemp: Dispatch<SetStateAction<number | undefined>>,
-  setOilTemp: Dispatch<SetStateAction<number | undefined>>,
   setOutsideTemp: Dispatch<SetStateAction<number | undefined>>,
   setFuelConsumption: Dispatch<SetStateAction<number | undefined>>,
   setOdo: Dispatch<SetStateAction<number | undefined>>,
-  setSpeed: Dispatch<SetStateAction<number | undefined>>,
 ) => {
   try {
     const ELM327 = await navigator.bluetooth.requestDevice({
@@ -36,16 +35,16 @@ export const connectToELM327 = async (
         setRpm(rpmValue);
       }
 
+      if (value.includes("41 0D")) {
+        const hexValues = value.split(" ");
+        console.log("SPEED_hexValues", hexValues);
+        setSpeed(parseInt(hexValues[2], 16));
+      }
+
       if (value.includes("41 05")) {
         const hexValues = value.split(" ");
         console.log("WATER_TEMP_hexValues", hexValues);
         setWaterTemp(parseInt(hexValues[2], 16) - 40);
-      }
-
-      if (value.includes("41 5C")) {
-        const hexValues = value.split(" ");
-        console.log("OIL_TEMP_hexValues", hexValues);
-        setOilTemp(parseInt(hexValues[2], 16) - 40);
       }
 
       if (value.includes("41 46")) {
@@ -53,17 +52,6 @@ export const connectToELM327 = async (
         console.log("OUTSIDE_TEMP_hexValues", hexValues);
         setOutsideTemp(parseInt(hexValues[2], 16) - 40);
       }
-
-      // // if (value.includes("41 5E")) {
-      // if (value.includes("41 10")) {
-      //   const hexValues = value.split(" ");
-      //   console.log("FUEL_CONSUMPTION_hexValues", hexValues);
-      //   const A = parseInt(hexValues[2], 16);
-      //   const B = parseInt(hexValues[3], 16);
-      //   // const fuelConsumptionValue = (256 * A + B) / 20;
-      //   const fuelConsumptionValue = (256 * A + B) / 100;
-      //   setFuelConsumption(fuelConsumptionValue);
-      // }
 
       if (value.includes("41 10")) {
         const hexValues = value.split(" ");
@@ -85,12 +73,6 @@ export const connectToELM327 = async (
         const D = parseInt(hexValues[5], 16);
         const odoValue = (A * 2 ** 24 + B * 2 ** 16 + C * 2 ** 8 + D) / 10;
         setOdo(odoValue);
-      }
-
-      if (value.includes("41 0D")) {
-        const hexValues = value.split(" ");
-        console.log("SPEED_hexValues", hexValues);
-        setSpeed(parseInt(hexValues[2], 16));
       }
     });
   } catch (error) {

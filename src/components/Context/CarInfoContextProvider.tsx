@@ -14,18 +14,16 @@ export type CarInfoContextType = Readonly<{
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>;
   rpm: number | undefined;
   setRpm: Dispatch<SetStateAction<number | undefined>>;
+  speed: number | undefined;
+  setSpeed: Dispatch<SetStateAction<number | undefined>>;
   waterTemp: number | undefined;
   setWaterTemp: Dispatch<SetStateAction<number | undefined>>;
-  oilTemp: number | undefined;
-  setOilTemp: Dispatch<SetStateAction<number | undefined>>;
   outsideTemp: number | undefined;
   setOutsideTemp: Dispatch<SetStateAction<number | undefined>>;
   fuelConsumption: number | undefined;
   setFuelConsumption: Dispatch<SetStateAction<number | undefined>>;
   odo: number | undefined;
   setOdo: Dispatch<SetStateAction<number | undefined>>;
-  speed: number | undefined;
-  setSpeed: Dispatch<SetStateAction<number | undefined>>;
 }>;
 
 export const CarInfoContext = createContext<CarInfoContextType>({
@@ -33,47 +31,42 @@ export const CarInfoContext = createContext<CarInfoContextType>({
   setDevice: () => {},
   rpm: undefined,
   setRpm: () => {},
+  speed: undefined,
+  setSpeed: () => {},
   waterTemp: undefined,
   setWaterTemp: () => {},
-  oilTemp: undefined,
-  setOilTemp: () => {},
   outsideTemp: undefined,
   setOutsideTemp: () => {},
   fuelConsumption: undefined,
   setFuelConsumption: () => {},
   odo: undefined,
   setOdo: () => {},
-  speed: undefined,
-  setSpeed: () => {},
 });
 
 export const CarInfoContextProvider: FC<Props> = ({ children }) => {
   const [device, setDevice] = useState<BluetoothDevice>();
   const [rpm, setRpm] = useState<number>();
+  const [speed, setSpeed] = useState<number>();
   const [waterTemp, setWaterTemp] = useState<number>();
-  const [oilTemp, setOilTemp] = useState<number>();
   const [outsideTemp, setOutsideTemp] = useState<number>();
   const [fuelConsumption, setFuelConsumption] = useState<number>();
   const [odo, setOdo] = useState<number>();
-  const [speed, setSpeed] = useState<number>();
 
   const value = {
     device,
     setDevice,
     rpm,
     setRpm,
+    speed,
+    setSpeed,
     waterTemp,
     setWaterTemp,
-    oilTemp,
-    setOilTemp,
     outsideTemp,
     setOutsideTemp,
     fuelConsumption,
     setFuelConsumption,
     odo,
     setOdo,
-    speed,
-    setSpeed,
   };
 
   return (

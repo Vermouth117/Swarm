@@ -30,12 +30,11 @@ export default function OilInfo() {
   const {
     setDevice,
     setRpm,
+    setSpeed,
     setWaterTemp,
-    setOilTemp,
     setOutsideTemp,
     setFuelConsumption,
     setOdo,
-    setSpeed,
   } = useContext(CarInfoContext);
 
   return (
@@ -62,18 +61,17 @@ export default function OilInfo() {
               await connectToELM327(
                 setDevice,
                 setRpm,
+                setSpeed,
                 setWaterTemp,
-                setOilTemp,
                 setOutsideTemp,
                 setFuelConsumption,
                 setOdo,
-                setSpeed,
               );
             }}
           >
             {/* onClick={() => {navigate("/", { state: { loggedIn: location.state.loggedIn } })}}  */}
             <ChevronLeftIcon />
-            <div className={style.backButton}>Monitorring</div>
+            <div className={style.backButton}>Monitoring</div>
           </div>
           <div className={style.periodContainer}>
             <SelectPeriod
@@ -138,7 +136,11 @@ export default function OilInfo() {
                 x1="90"
                 y1="-30"
                 x2="80"
-                y2="400"
+                y2="200"
+                // x1="90"
+                // y1="-30"
+                // x2="80"
+                // y2="400"
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stopColor="#3D39EA" />
