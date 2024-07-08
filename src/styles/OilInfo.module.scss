@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 30px;
 
   .backButtonContainer {
     top: 103px;
@@ -44,7 +43,7 @@
 
   .pointContainer {
     @include font;
-    bottom: 118px;
+    bottom: 100px;
     left: 43.5%;
     display: flex;
     flex-direction: column;
@@ -54,7 +53,7 @@
   }
 
   .pointContainerOfYear {
-    left: 69.3%;
+    left: 68%;
   }
 }
 

@@ -101,12 +101,12 @@ export default function OilInfo() {
           </div>
           <LineChart
             width={window.innerWidth}
-            height={window.innerHeight - 93 - 81 - 60 - 16 - 60 - 16 - 30}
+            height={window.innerHeight - 93 - 81 - 60 - 60}
             data={oilInfo}
             margin={{
               left: 20,
               right: 20,
-              bottom: 65,
+              bottom: 80,
             }}
           >
             <XAxis
@@ -133,9 +133,9 @@ export default function OilInfo() {
             <defs>
               <linearGradient
                 id="gradationColor"
-                x1="90"
-                y1="-30"
-                x2="80"
+                x1="50"
+                y1="-50"
+                x2="50"
                 y2="200"
                 // x1="90"
                 // y1="-30"

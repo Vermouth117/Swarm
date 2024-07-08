@@ -74,7 +74,7 @@ export default function Home() {
         Hello
       </div>
       <div className={`${style.userName} ${loggedIn && style.fadeOut}`}>
-        MMMTMN
+        Kento Izumi
       </div>
       <div
         className={`${style.rockIconContainer} ${loggedIn && style.fadeOut}`}
