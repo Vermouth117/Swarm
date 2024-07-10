@@ -29,6 +29,14 @@ export default function Home() {
   //   setFuelConsumption,
   //   odo,
   //   setOdo,
+  //   throttlePosition,
+  //   setThrottlePosition,
+  //   voltage,
+  //   setVoltage,
+  //   timeFromEngineStart,
+  //   setTimeFromEngineStart,
+  //   oilTemp,
+  //   setOilTemp,
   // } = useContext(CarInfoContext);
 
   return (
@@ -48,26 +56,44 @@ export default function Home() {
       {/*          setOutsideTemp,*/}
       {/*          setFuelConsumption,*/}
       {/*          setOdo,*/}
+      {/*          setThrottlePosition,*/}
+      {/*          setVoltage,*/}
+      {/*          setTimeFromEngineStart,*/}
+      {/*          setOilTemp,*/}
       {/*        )*/}
       {/*      }*/}
       {/*    >*/}
       {/*      ELM327に接続*/}
       {/*    </button>*/}
       {/*  )}*/}
-      {/*  <button onClick={() => sendCommand(device, "010C")}>*/}
+      {/*  <button onClick={() => sendCommand(device!, "010C")}>*/}
       {/*    エンジン回転数*/}
       {/*  </button>*/}
       {/*  {rpm && <div>Engine RPM: {rpm}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "010D")}>スピード</button>*/}
-      {/*  <div>Speed: {speed}</div>*/}
-      {/*  <button onClick={() => sendCommand(device, "0105")}>水温</button>*/}
+      {/*  <button onClick={() => sendCommand(device!, "010D")}>スピード</button>*/}
+      {/*  {speed && <div>Speed: {speed}</div>}*/}
+      {/*  <button onClick={() => sendCommand(device!, "0105")}>水温</button>*/}
       {/*  {waterTemp && <div>水温: {waterTemp}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "0146")}>外気温</button>*/}
+      {/*  <button onClick={() => sendCommand(device!, "0146")}>外気温</button>*/}
       {/*  {outsideTemp && <div>外気温: {outsideTemp}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "0110")}>燃料消費量</button>*/}
+      {/*  <button onClick={() => sendCommand(device!, "0110")}>燃料消費量</button>*/}
       {/*  {fuelConsumption && <div>燃料消費量: {fuelConsumption}</div>}*/}
-      {/*  <button onClick={() => sendCommand(device, "01A6")}>走行距離</button>*/}
+      {/*  <button onClick={() => sendCommand(device!, "01A6")}>走行距離</button>*/}
       {/*  {odo && <div>ODO: {odo}</div>}*/}
+      {/*  <button onClick={() => sendCommand(device!, "0145")}>*/}
+      {/*    スロットル位置*/}
+      {/*  </button>*/}
+      {/*  {throttlePosition && <div>スロットル位置: {throttlePosition}</div>}*/}
+      {/*  <button onClick={() => sendCommand(device!, "0166")}>電圧</button>*/}
+      {/*  {voltage && <div>電圧: {voltage}</div>}*/}
+      {/*  <button onClick={() => sendCommand(device!, "011F")}>*/}
+      {/*    エンジン始動時間*/}
+      {/*  </button>*/}
+      {/*  {timeFromEngineStart && (*/}
+      {/*    <div>エンジン始動時間: {timeFromEngineStart}</div>*/}
+      {/*  )}*/}
+      {/*  <button onClick={() => sendCommand(device!, "015C")}>油温</button>*/}
+      {/*  {oilTemp && <div>油温: {oilTemp}</div>}*/}
       {/*</div>*/}
       <SideBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <div className={`${style.greeting} ${loggedIn && style.fadeOut}`}>

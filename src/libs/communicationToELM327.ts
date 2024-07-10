@@ -8,6 +8,17 @@ export const connectToELM327 = async (
   setOutsideTemp: Dispatch<SetStateAction<number | undefined>>,
   setFuelConsumption: Dispatch<SetStateAction<number | undefined>>,
   setOdo: Dispatch<SetStateAction<number | undefined>>,
+  setThrottlePosition: Dispatch<SetStateAction<number | undefined>>,
+  setVoltage: Dispatch<SetStateAction<number | undefined>>,
+  setTimeFromEngineStart: Dispatch<SetStateAction<number | undefined>>,
+  setOilTemp: Dispatch<SetStateAction<number | undefined>>,
+  setEngineLoad: Dispatch<SetStateAction<number | undefined>>,
+  setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>,
+  setFuelPressure: Dispatch<SetStateAction<number | undefined>>,
+  setIntakePressure: Dispatch<SetStateAction<number | undefined>>,
+  setAbsolutePressure: Dispatch<SetStateAction<number | undefined>>,
+  setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>,
+  setTorque: Dispatch<SetStateAction<number | undefined>>,
 ) => {
   try {
     const ELM327 = await navigator.bluetooth.requestDevice({
@@ -32,7 +43,7 @@ export const connectToELM327 = async (
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
         const rpmValue = (256 * A + B) / 4;
-        setRpm(rpmValue);
+        setRpm(Number(rpmValue.toFixed(0)));
       }
 
       if (value.includes("41 0D")) {
@@ -73,6 +84,84 @@ export const connectToELM327 = async (
         const D = parseInt(hexValues[5], 16);
         const odoValue = (A * 2 ** 24 + B * 2 ** 16 + C * 2 ** 8 + D) / 10;
         setOdo(odoValue);
+      }
+
+      if (value.includes("41 45")) {
+        const hexValues = value.split(" ");
+        console.log("THROTTLE_POSITION_hexValues", hexValues);
+        setThrottlePosition(
+          Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
+        );
+      }
+
+      if (value.includes("41 66")) {
+        const hexValues = value.split(" ");
+        console.log("VOLTAGE_hexValues", hexValues);
+        const A = parseInt(hexValues[2], 16);
+        const B = parseInt(hexValues[3], 16);
+        setVoltage((256 * A + B) / 1000);
+      }
+
+      if (value.includes("41 1F")) {
+        const hexValues = value.split(" ");
+        console.log("TIME_FROM_ENGINE_START_hexValues", hexValues);
+        const A = parseInt(hexValues[2], 16);
+        const B = parseInt(hexValues[3], 16);
+        setTimeFromEngineStart(256 * A + B);
+      }
+
+      if (value.includes("41 5C")) {
+        const hexValues = value.split(" ");
+        console.log("OIL_TEMP_hexValues", hexValues);
+        setOilTemp(parseInt(hexValues[2], 16) - 40);
+      }
+
+      if (value.includes("41 04")) {
+        const hexValues = value.split(" ");
+        console.log("ENGINE_LOAD_hexValues", hexValues);
+        setEngineLoad(Number((parseInt(hexValues[2], 16) / 2.55).toFixed(2)));
+      }
+
+      if (value.includes("41 2F")) {
+        const hexValues = value.split(" ");
+        console.log("FUEL_TANK_LEVEL_hexValues", hexValues);
+        setFuelTankLevel(
+          Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
+        );
+      }
+
+      if (value.includes("41 0A")) {
+        const hexValues = value.split(" ");
+        console.log("FUEL_PRESSURE_hexValues", hexValues);
+        setFuelPressure(parseInt(hexValues[2], 16) * 3);
+      }
+
+      if (value.includes("41 0B")) {
+        const hexValues = value.split(" ");
+        console.log("INTAKE_PRESSURE_hexValues", hexValues);
+        setIntakePressure(parseInt(hexValues[2], 16));
+      }
+
+      if (value.includes("41 33")) {
+        const hexValues = value.split(" ");
+        console.log("ABSOLUTE_PRESSURE_hexValues", hexValues);
+        setAbsolutePressure(parseInt(hexValues[2], 16));
+      }
+
+      if (value.includes("41 5A")) {
+        const hexValues = value.split(" ");
+        console.log("ACCELERATOR_PEDAL_POSITION_hexValues", hexValues);
+        setAcceleratorPedalPosition(
+          Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
+        );
+      }
+
+      if (value.includes("41 99")) {
+        const hexValues = value.split(" ");
+        console.log("TORQUE_hexValues", hexValues);
+        const A = parseInt(hexValues[2], 16);
+        const B = parseInt(hexValues[3], 16);
+        setTorque(256 * A + B);
       }
     });
   } catch (error) {

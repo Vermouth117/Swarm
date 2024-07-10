@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react"; // import { useLocation, useNavigate } from "react-router-dom";
 import {
   CartesianGrid,
   Line,
@@ -35,6 +34,17 @@ export default function OilInfo() {
     setOutsideTemp,
     setFuelConsumption,
     setOdo,
+    setThrottlePosition,
+    setVoltage,
+    setTimeFromEngineStart,
+    setOilTemp,
+    setEngineLoad,
+    setFuelTankLevel,
+    setFuelPressure,
+    setIntakePressure,
+    setAbsolutePressure,
+    setAcceleratorPedalPosition,
+    setTorque,
   } = useContext(CarInfoContext);
 
   return (
@@ -44,7 +54,7 @@ export default function OilInfo() {
           <div
             className={style.backButtonContainer}
             style={{ position: "absolute" }}
-            onClick={(_) => setFlag(false)}
+            onClick={() => setFlag(false)}
           >
             <ChevronLeftIcon />
             <div className={style.backButton}>Oil Deterioration</div>
@@ -56,7 +66,7 @@ export default function OilInfo() {
           <div
             className={style.backButtonContainer}
             style={{ position: "absolute" }}
-            onClick={async (_) => {
+            onClick={async () => {
               setFlag(true);
               await connectToELM327(
                 setDevice,
@@ -66,6 +76,17 @@ export default function OilInfo() {
                 setOutsideTemp,
                 setFuelConsumption,
                 setOdo,
+                setThrottlePosition,
+                setVoltage,
+                setTimeFromEngineStart,
+                setOilTemp,
+                setEngineLoad,
+                setFuelTankLevel,
+                setFuelPressure,
+                setIntakePressure,
+                setAbsolutePressure,
+                setAcceleratorPedalPosition,
+                setTorque,
               );
             }}
           >

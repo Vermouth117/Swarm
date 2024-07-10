@@ -24,6 +24,28 @@ export type CarInfoContextType = Readonly<{
   setFuelConsumption: Dispatch<SetStateAction<number | undefined>>;
   odo: number | undefined;
   setOdo: Dispatch<SetStateAction<number | undefined>>;
+  throttlePosition: number | undefined;
+  setThrottlePosition: Dispatch<SetStateAction<number | undefined>>;
+  voltage: number | undefined;
+  setVoltage: Dispatch<SetStateAction<number | undefined>>;
+  timeFromEngineStart: number | undefined;
+  setTimeFromEngineStart: Dispatch<SetStateAction<number | undefined>>;
+  oilTemp: number | undefined;
+  setOilTemp: Dispatch<SetStateAction<number | undefined>>;
+  engineLoad: number | undefined;
+  setEngineLoad: Dispatch<SetStateAction<number | undefined>>;
+  fuelTankLevel: number | undefined;
+  setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>;
+  fuelPressure: number | undefined;
+  setFuelPressure: Dispatch<SetStateAction<number | undefined>>;
+  intakePressure: number | undefined;
+  setIntakePressure: Dispatch<SetStateAction<number | undefined>>;
+  absolutePressure: number | undefined;
+  setAbsolutePressure: Dispatch<SetStateAction<number | undefined>>;
+  acceleratorPedalPosition: number | undefined;
+  setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>;
+  torque: number | undefined;
+  setTorque: Dispatch<SetStateAction<number | undefined>>;
 }>;
 
 export const CarInfoContext = createContext<CarInfoContextType>({
@@ -41,6 +63,28 @@ export const CarInfoContext = createContext<CarInfoContextType>({
   setFuelConsumption: () => {},
   odo: undefined,
   setOdo: () => {},
+  throttlePosition: undefined,
+  setThrottlePosition: () => {},
+  voltage: undefined,
+  setVoltage: () => {},
+  timeFromEngineStart: undefined,
+  setTimeFromEngineStart: () => {},
+  oilTemp: undefined,
+  setOilTemp: () => {},
+  engineLoad: undefined,
+  setEngineLoad: () => {},
+  fuelTankLevel: undefined,
+  setFuelTankLevel: () => {},
+  fuelPressure: undefined,
+  setFuelPressure: () => {},
+  intakePressure: undefined,
+  setIntakePressure: () => {},
+  absolutePressure: undefined,
+  setAbsolutePressure: () => {},
+  acceleratorPedalPosition: undefined,
+  setAcceleratorPedalPosition: () => {},
+  torque: undefined,
+  setTorque: () => {},
 });
 
 export const CarInfoContextProvider: FC<Props> = ({ children }) => {
@@ -51,6 +95,18 @@ export const CarInfoContextProvider: FC<Props> = ({ children }) => {
   const [outsideTemp, setOutsideTemp] = useState<number>();
   const [fuelConsumption, setFuelConsumption] = useState<number>();
   const [odo, setOdo] = useState<number>();
+  const [throttlePosition, setThrottlePosition] = useState<number>();
+  const [voltage, setVoltage] = useState<number>();
+  const [timeFromEngineStart, setTimeFromEngineStart] = useState<number>();
+  const [oilTemp, setOilTemp] = useState<number>();
+  const [engineLoad, setEngineLoad] = useState<number>();
+  const [fuelTankLevel, setFuelTankLevel] = useState<number>();
+  const [fuelPressure, setFuelPressure] = useState<number>();
+  const [intakePressure, setIntakePressure] = useState<number>();
+  const [absolutePressure, setAbsolutePressure] = useState<number>();
+  const [acceleratorPedalPosition, setAcceleratorPedalPosition] =
+    useState<number>();
+  const [torque, setTorque] = useState<number>();
 
   const value = {
     device,
@@ -67,6 +123,28 @@ export const CarInfoContextProvider: FC<Props> = ({ children }) => {
     setFuelConsumption,
     odo,
     setOdo,
+    throttlePosition,
+    setThrottlePosition,
+    voltage,
+    setVoltage,
+    timeFromEngineStart,
+    setTimeFromEngineStart,
+    oilTemp,
+    setOilTemp,
+    engineLoad,
+    setEngineLoad,
+    fuelTankLevel,
+    setFuelTankLevel,
+    fuelPressure,
+    setFuelPressure,
+    intakePressure,
+    setIntakePressure,
+    absolutePressure,
+    setAbsolutePressure,
+    acceleratorPedalPosition,
+    setAcceleratorPedalPosition,
+    torque,
+    setTorque,
   };
 
   return (
