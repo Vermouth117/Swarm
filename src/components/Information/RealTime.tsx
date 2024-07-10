@@ -38,12 +38,12 @@ export default function RealTime() {
           await sendCommand(device, "0110");
           await sendCommand(device, "01A6");
           await sendCommand(device, "0145");
-          await sendCommand(device, "0166");
+          await sendCommand(device, "0142");
           await sendCommand(device, "011F");
           await sendCommand(device, "015C");
           await sendCommand(device, "0104");
           await sendCommand(device, "012F");
-          await sendCommand(device, "010A");
+          await sendCommand(device, "0123");
           await sendCommand(device, "010B");
           await sendCommand(device, "0133");
           await sendCommand(device, "015A");
@@ -88,13 +88,13 @@ export default function RealTime() {
           unit={"％"}
         />
         <RealTimeCard
-          title={"Fuel tank level"}
-          value={fuelTankLevel || 0}
-          unit={"％"}
-        />
-        <RealTimeCard
           title={"Fuel pressure"}
           value={fuelPressure || 0}
+          unit={"kPa"}
+        />
+        <RealTimeCard
+          title={"Absolute pressure"}
+          value={absolutePressure || 0}
           unit={"kPa"}
         />
         <RealTimeCard
@@ -103,9 +103,9 @@ export default function RealTime() {
           unit={"kPa"}
         />
         <RealTimeCard
-          title={"Absolute pressure"}
-          value={absolutePressure || 0}
-          unit={"kPa"}
+          title={"Fuel tank level"}
+          value={fuelTankLevel || 0}
+          unit={"％"}
         />
         <RealTimeCard
           title={"Accel pedal position"}

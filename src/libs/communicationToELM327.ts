@@ -36,7 +36,7 @@ export const connectToELM327 = async (
       const value = new TextDecoder().decode(target.value!); // new TextDecoder() デフォルト utf-8 or utf8
       console.log("Received value:", value);
 
-      // 41 = 現在のデータを表示
+      // 41 = 現在のデータを表示（レスポンス）
       if (value.includes("41 0C")) {
         const hexValues = value.split(" ");
         console.log("RPM_hexValues", hexValues);
@@ -94,12 +94,12 @@ export const connectToELM327 = async (
         );
       }
 
-      if (value.includes("41 66")) {
+      if (value.includes("41 42")) {
         const hexValues = value.split(" ");
         console.log("VOLTAGE_hexValues", hexValues);
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
-        setVoltage((256 * A + B) / 1000);
+        setVoltage(Number(((256 * A + B) / 1000).toFixed(1)));
       }
 
       if (value.includes("41 1F")) {
@@ -130,10 +130,12 @@ export const connectToELM327 = async (
         );
       }
 
-      if (value.includes("41 0A")) {
+      if (value.includes("41 23")) {
         const hexValues = value.split(" ");
         console.log("FUEL_PRESSURE_hexValues", hexValues);
-        setFuelPressure(parseInt(hexValues[2], 16) * 3);
+        const A = parseInt(hexValues[2], 16);
+        const B = parseInt(hexValues[3], 16);
+        setFuelPressure((256 * A + B) * 10);
       }
 
       if (value.includes("41 0B")) {
