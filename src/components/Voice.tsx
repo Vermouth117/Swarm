@@ -1,17 +1,20 @@
 import Footer from "./Footer.tsx";
 import styles from "../styles/Voice.module.scss"
+const isLocal = import.meta.env.VITE_APP_ISLOCAL;
 
 export default function Voice() {
 
+
     return (
-        <section>
-            <div className={styles.iframeContainer}>
+        <section className={styles.iframeSection}>
+            <div>
                 <iframe
-                    src="https://d3b8mr1wm8ww1d.cloudfront.net/"
+                    src={isLocal ? "http://localhost:5200" : "https://dvgi3dgexiavz.cloudfront.net/"}
                     scrolling="no"
                     width="100%"
-                    height={window.innerHeight * 0.75}
+                    height={window.innerHeight - 170}
                     allow="microphone; camera;"
+                    frameBorder="none"
                 >
                 </iframe>
             </div>
