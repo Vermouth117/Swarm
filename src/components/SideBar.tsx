@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { SideBarProps } from "../models/SideBarProps.ts";
 import { CarInfoContext } from "./Context/CarInfoContextProvider.tsx";
 import style from "../styles/SideBar.module.scss";
 import HomeIcon from "../icons/Home.svg";
-import OilStainsBG from "../icons/OilStainsBG.svg";
 import OilStainsRipplesBig from "../icons/OilStainsRipplesBig.svg";
 import OilStainsRipplesSmall from "../icons/OilStainsRipplesSmall.svg";
 
@@ -14,18 +13,10 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
 
   const { speed, outsideTemp, odo } = useContext(CarInfoContext);
 
-  // const [carInfo, setCarInfo] = useState<carInfo>(initialCarInfo);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     setCarInfo({
-  //       temperature: 32,
-  //       mileage: 11111,
-  //       oilStains: 62,
-  //       speed: 45,
-  //     });
-  //   })();
-  // }, []);
+  const [oilStainsNum, setOilStainsNum] = useState<number>(0);
+  useEffect(() => {
+    setOilStainsNum(68);
+  }, []);
 
   return (
     <aside
@@ -39,9 +30,8 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             style={{ position: "relative" }}
           >
             {outsideTemp || 31}
-            {/*{carInfo.temperature}*/}
           </div>
-          <div className={style.itemName}>気温</div>
+          <div className={style.itemName}>Temp</div>
         </div>
         <div className={style.itemContainer}>
           <div
@@ -49,9 +39,8 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             style={{ position: "relative" }}
           >
             {odo || 98117}
-            {/*{carInfo.mileage}*/}
           </div>
-          <div className={style.itemName}>走行距離</div>
+          <div className={style.itemName}>Mileage</div>
         </div>
         <div className={style.itemContainer} style={{ position: "relative" }}>
           <div className={style.oilStains}>
@@ -61,15 +50,18 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             <div style={{ position: "absolute" }}>
               <OilStainsRipplesSmall />
             </div>
-            <div style={{ position: "absolute" }}>
-              <OilStainsBG />
-            </div>
+            <div
+              className={style.circle}
+              style={{
+                position: "absolute",
+                background: `linear-gradient(white, white, #E65000 ${-2 * oilStainsNum + 200}%)`,
+              }}
+            ></div>
             <div
               className={style.oilStainsNum}
               style={{ position: "absolute" }}
             >
-              48
-              {/*{carInfo.oilStains}*/}
+              {oilStainsNum}
               <span>％</span>
             </div>
           </div>
@@ -80,9 +72,8 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             style={{ position: "relative" }}
           >
             {speed || 0}
-            {/*{carInfo.speed}*/}
           </div>
-          <div className={style.itemName}>SPEED</div>
+          <div className={style.itemName}>Speed</div>
         </div>
         <div
           className={style.homeIcon}

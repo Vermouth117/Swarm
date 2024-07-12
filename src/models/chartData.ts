@@ -1,9 +1,9 @@
-export type oilInfo = {
+export type chartData = {
   date: string;
   degree: number;
 };
 
-export const initialOilInfoOfHalfYear: oilInfo[] = [
+export const initialOilInfoOfHalfYear: chartData[] = [
   {
     // date: "06/01",
     date: "Jun",
@@ -156,7 +156,7 @@ export const initialOilInfoOfHalfYear: oilInfo[] = [
   },
 ];
 
-export const oilInfoOfYear: oilInfo[] = [
+export const oilInfoOfYear: chartData[] = [
   {
     // date: "12/01",
     date: "Dec",

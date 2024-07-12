@@ -7,13 +7,15 @@ import {
   useState,
 } from "react";
 
+import { chartData } from "../../models/chartData.ts";
+
 export type Props = Readonly<{ children: ReactNode }>;
 
 export type CarInfoContextType = Readonly<{
   device: BluetoothDevice | undefined;
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>;
-  rpm: number | undefined;
-  setRpm: Dispatch<SetStateAction<number | undefined>>;
+  rpm: chartData[] | undefined;
+  setRpm: Dispatch<SetStateAction<chartData[] | undefined>>;
   speed: number | undefined;
   setSpeed: Dispatch<SetStateAction<number | undefined>>;
   waterTemp: number | undefined;
@@ -34,18 +36,18 @@ export type CarInfoContextType = Readonly<{
   setOilTemp: Dispatch<SetStateAction<number | undefined>>;
   engineLoad: number | undefined;
   setEngineLoad: Dispatch<SetStateAction<number | undefined>>;
-  fuelTankLevel: number | undefined;
-  setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>;
-  fuelPressure: number | undefined;
-  setFuelPressure: Dispatch<SetStateAction<number | undefined>>;
-  intakePressure: number | undefined;
-  setIntakePressure: Dispatch<SetStateAction<number | undefined>>;
   absolutePressure: number | undefined;
   setAbsolutePressure: Dispatch<SetStateAction<number | undefined>>;
-  acceleratorPedalPosition: number | undefined;
-  setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>;
-  torque: number | undefined;
-  setTorque: Dispatch<SetStateAction<number | undefined>>;
+  // fuelTankLevel: number | undefined;
+  // setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>;
+  // fuelPressure: number | undefined;
+  // setFuelPressure: Dispatch<SetStateAction<number | undefined>>;
+  // intakePressure: number | undefined;
+  // setIntakePressure: Dispatch<SetStateAction<number | undefined>>;
+  // acceleratorPedalPosition: number | undefined;
+  // setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>;
+  // torque: number | undefined;
+  // setTorque: Dispatch<SetStateAction<number | undefined>>;
 }>;
 
 export const CarInfoContext = createContext<CarInfoContextType>({
@@ -73,23 +75,23 @@ export const CarInfoContext = createContext<CarInfoContextType>({
   setOilTemp: () => {},
   engineLoad: undefined,
   setEngineLoad: () => {},
-  fuelTankLevel: undefined,
-  setFuelTankLevel: () => {},
-  fuelPressure: undefined,
-  setFuelPressure: () => {},
-  intakePressure: undefined,
-  setIntakePressure: () => {},
   absolutePressure: undefined,
   setAbsolutePressure: () => {},
-  acceleratorPedalPosition: undefined,
-  setAcceleratorPedalPosition: () => {},
-  torque: undefined,
-  setTorque: () => {},
+  // fuelTankLevel: undefined,
+  // setFuelTankLevel: () => {},
+  // fuelPressure: undefined,
+  // setFuelPressure: () => {},
+  // intakePressure: undefined,
+  // setIntakePressure: () => {},
+  // acceleratorPedalPosition: undefined,
+  // setAcceleratorPedalPosition: () => {},
+  // torque: undefined,
+  // setTorque: () => {},
 });
 
 export const CarInfoContextProvider: FC<Props> = ({ children }) => {
   const [device, setDevice] = useState<BluetoothDevice>();
-  const [rpm, setRpm] = useState<number>();
+  const [rpm, setRpm] = useState<chartData[]>();
   const [speed, setSpeed] = useState<number>();
   const [waterTemp, setWaterTemp] = useState<number>();
   const [outsideTemp, setOutsideTemp] = useState<number>();
@@ -100,13 +102,13 @@ export const CarInfoContextProvider: FC<Props> = ({ children }) => {
   const [timeFromEngineStart, setTimeFromEngineStart] = useState<number>();
   const [oilTemp, setOilTemp] = useState<number>();
   const [engineLoad, setEngineLoad] = useState<number>();
-  const [fuelTankLevel, setFuelTankLevel] = useState<number>();
-  const [fuelPressure, setFuelPressure] = useState<number>();
-  const [intakePressure, setIntakePressure] = useState<number>();
   const [absolutePressure, setAbsolutePressure] = useState<number>();
-  const [acceleratorPedalPosition, setAcceleratorPedalPosition] =
-    useState<number>();
-  const [torque, setTorque] = useState<number>();
+  // const [fuelTankLevel, setFuelTankLevel] = useState<number>();
+  // const [fuelPressure, setFuelPressure] = useState<number>();
+  // const [intakePressure, setIntakePressure] = useState<number>();
+  // const [acceleratorPedalPosition, setAcceleratorPedalPosition] =
+  //   useState<number>();
+  // const [torque, setTorque] = useState<number>();
 
   const value = {
     device,
@@ -133,18 +135,18 @@ export const CarInfoContextProvider: FC<Props> = ({ children }) => {
     setOilTemp,
     engineLoad,
     setEngineLoad,
-    fuelTankLevel,
-    setFuelTankLevel,
-    fuelPressure,
-    setFuelPressure,
-    intakePressure,
-    setIntakePressure,
     absolutePressure,
     setAbsolutePressure,
-    acceleratorPedalPosition,
-    setAcceleratorPedalPosition,
-    torque,
-    setTorque,
+    // fuelTankLevel,
+    // setFuelTankLevel,
+    // fuelPressure,
+    // setFuelPressure,
+    // intakePressure,
+    // setIntakePressure,
+    // acceleratorPedalPosition,
+    // setAcceleratorPedalPosition,
+    // torque,
+    // setTorque,
   };
 
   return (

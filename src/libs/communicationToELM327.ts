@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
+import { chartData } from "../models/chartData.ts";
+
 export const connectToELM327 = async (
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>,
-  setRpm: Dispatch<SetStateAction<number | undefined>>,
+  setRpm: Dispatch<SetStateAction<chartData[] | undefined>>,
   setSpeed: Dispatch<SetStateAction<number | undefined>>,
   setWaterTemp: Dispatch<SetStateAction<number | undefined>>,
   setOutsideTemp: Dispatch<SetStateAction<number | undefined>>,
@@ -13,12 +15,12 @@ export const connectToELM327 = async (
   setTimeFromEngineStart: Dispatch<SetStateAction<number | undefined>>,
   setOilTemp: Dispatch<SetStateAction<number | undefined>>,
   setEngineLoad: Dispatch<SetStateAction<number | undefined>>,
-  setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>,
-  setFuelPressure: Dispatch<SetStateAction<number | undefined>>,
-  setIntakePressure: Dispatch<SetStateAction<number | undefined>>,
   setAbsolutePressure: Dispatch<SetStateAction<number | undefined>>,
-  setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>,
-  setTorque: Dispatch<SetStateAction<number | undefined>>,
+  // setFuelTankLevel: Dispatch<SetStateAction<number | undefined>>,
+  // setFuelPressure: Dispatch<SetStateAction<number | undefined>>,
+  // setIntakePressure: Dispatch<SetStateAction<number | undefined>>,
+  // setAcceleratorPedalPosition: Dispatch<SetStateAction<number | undefined>>,
+  // setTorque: Dispatch<SetStateAction<number | undefined>>,
 ) => {
   try {
     const ELM327 = await navigator.bluetooth.requestDevice({
@@ -43,7 +45,33 @@ export const connectToELM327 = async (
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
         const rpmValue = (256 * A + B) / 4;
-        setRpm(Number(rpmValue.toFixed(0)));
+        const date = new Date();
+        setRpm((prevRpm) => {
+          if (prevRpm && prevRpm?.length >= 20) {
+            return [
+              ...prevRpm.slice(1),
+              {
+                date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
+                degree: Number(rpmValue.toFixed(0)),
+              },
+            ];
+          } else if (prevRpm) {
+            return [
+              ...prevRpm,
+              {
+                date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
+                degree: Number(rpmValue.toFixed(0)),
+              },
+            ];
+          }
+          return [
+            {
+              date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
+              degree: Number(rpmValue.toFixed(0)),
+            },
+          ];
+        });
+        // setRpm(Number(rpmValue.toFixed(0)));
       }
 
       if (value.includes("41 0D")) {
@@ -122,49 +150,49 @@ export const connectToELM327 = async (
         setEngineLoad(Number((parseInt(hexValues[2], 16) / 2.55).toFixed(2)));
       }
 
-      if (value.includes("41 2F")) {
-        const hexValues = value.split(" ");
-        console.log("FUEL_TANK_LEVEL_hexValues", hexValues);
-        setFuelTankLevel(
-          Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
-        );
-      }
-
-      if (value.includes("41 23")) {
-        const hexValues = value.split(" ");
-        console.log("FUEL_PRESSURE_hexValues", hexValues);
-        const A = parseInt(hexValues[2], 16);
-        const B = parseInt(hexValues[3], 16);
-        setFuelPressure((256 * A + B) * 10);
-      }
-
-      if (value.includes("41 0B")) {
-        const hexValues = value.split(" ");
-        console.log("INTAKE_PRESSURE_hexValues", hexValues);
-        setIntakePressure(parseInt(hexValues[2], 16));
-      }
-
       if (value.includes("41 33")) {
         const hexValues = value.split(" ");
         console.log("ABSOLUTE_PRESSURE_hexValues", hexValues);
         setAbsolutePressure(parseInt(hexValues[2], 16));
       }
 
-      if (value.includes("41 5A")) {
-        const hexValues = value.split(" ");
-        console.log("ACCELERATOR_PEDAL_POSITION_hexValues", hexValues);
-        setAcceleratorPedalPosition(
-          Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
-        );
-      }
+      // if (value.includes("41 2F")) {
+      //   const hexValues = value.split(" ");
+      //   console.log("FUEL_TANK_LEVEL_hexValues", hexValues);
+      //   setFuelTankLevel(
+      //     Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
+      //   );
+      // }
 
-      if (value.includes("41 99")) {
-        const hexValues = value.split(" ");
-        console.log("TORQUE_hexValues", hexValues);
-        const A = parseInt(hexValues[2], 16);
-        const B = parseInt(hexValues[3], 16);
-        setTorque(256 * A + B);
-      }
+      // if (value.includes("41 23")) {
+      //   const hexValues = value.split(" ");
+      //   console.log("FUEL_PRESSURE_hexValues", hexValues);
+      //   const A = parseInt(hexValues[2], 16);
+      //   const B = parseInt(hexValues[3], 16);
+      //   setFuelPressure((256 * A + B) * 10);
+      // }
+
+      // if (value.includes("41 0B")) {
+      //   const hexValues = value.split(" ");
+      //   console.log("INTAKE_PRESSURE_hexValues", hexValues);
+      //   setIntakePressure(parseInt(hexValues[2], 16));
+      // }
+
+      // if (value.includes("41 5A")) {
+      //   const hexValues = value.split(" ");
+      //   console.log("ACCELERATOR_PEDAL_POSITION_hexValues", hexValues);
+      //   setAcceleratorPedalPosition(
+      //     Number(((parseInt(hexValues[2], 16) * 100) / 255).toFixed(2)),
+      //   );
+      // }
+
+      // if (value.includes("41 99")) {
+      //   const hexValues = value.split(" ");
+      //   console.log("TORQUE_hexValues", hexValues);
+      //   const A = parseInt(hexValues[2], 16);
+      //   const B = parseInt(hexValues[3], 16);
+      //   setTorque(256 * A + B);
+      // }
     });
   } catch (error) {
     console.error("Bluetooth接続に失敗しました", error);

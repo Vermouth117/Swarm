@@ -1,17 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
 
 import {
+  chartData,
   initialOilInfoOfHalfYear,
-  oilInfo,
   oilInfoOfYear,
-} from "../../models/oilInfo.ts";
+} from "../../models/chartData.ts";
 import style from "../../styles/OilInfo.module.scss";
 
-export type props = {
+type Props = {
   period: string;
   isSelectedPeriod: string;
   setIsSelectedPeriod: Dispatch<SetStateAction<string>>;
-  setOilInfo: Dispatch<SetStateAction<oilInfo[]>>;
+  setOilInfo: Dispatch<SetStateAction<chartData[]>>;
 };
 
 export default function SelectPeriod({
@@ -19,14 +19,16 @@ export default function SelectPeriod({
   isSelectedPeriod,
   setIsSelectedPeriod,
   setOilInfo,
-}: props) {
+}: Props) {
   const update = () => {
     setIsSelectedPeriod(period);
-    setOilInfo(
-      period === "Year" || period === "Month"
-        ? oilInfoOfYear
-        : initialOilInfoOfHalfYear,
-    );
+    if (period === "Year" || period === "Month") {
+      setOilInfo(oilInfoOfYear);
+    } else if (period === "Half Year") {
+      setOilInfo(initialOilInfoOfHalfYear);
+    } else {
+      setOilInfo([]);
+    }
   };
 
   return (
