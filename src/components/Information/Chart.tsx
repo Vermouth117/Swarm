@@ -37,7 +37,7 @@ export default function Chart({
         top: viewItemName === "Oil Deterioration" ? 0 : 30,
         left: 20,
         right: 20,
-        bottom: viewItemName === "Oil Deterioration" ? 80 : 0,
+        bottom: viewItemName === "Oil Deterioration" ? 80 : 20,
       }}
     >
       <XAxis
@@ -50,7 +50,7 @@ export default function Chart({
         padding={{ left: 20, right: -25 }}
         tickLine={false}
         tick={{ stroke: "#6C6C6C", strokeWidth: 0.5, fontSize: 13 }}
-        tickMargin={65}
+        tickMargin={viewItemName === "Oil Deterioration" ? 65 : 30}
       />
       <YAxis
         dataKey="degree"
@@ -68,10 +68,10 @@ export default function Chart({
       <defs>
         <linearGradient
           id="gradationColor"
-          x1="50"
-          y1="-50"
-          x2="50"
-          y2="200"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="250"
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#FA5252" />

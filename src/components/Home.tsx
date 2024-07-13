@@ -16,7 +16,7 @@ export default function Home() {
   );
 
   return (
-    <section className={style.container}>
+    <article className={style.container}>
       <SideBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <div className={`${style.greeting} ${loggedIn && style.fadeOut}`}>
         Hello
@@ -53,6 +53,6 @@ export default function Home() {
         />
       </div>
       <Footer />
-    </section>
+    </article>
   );
 }

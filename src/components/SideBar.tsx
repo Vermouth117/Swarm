@@ -1,14 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
-import { SideBarProps } from "../models/SideBarProps.ts";
 import { CarInfoContext } from "./Context/CarInfoContextProvider.tsx";
 import style from "../styles/SideBar.module.scss";
 import HomeIcon from "../icons/Home.svg";
 import OilStainsRipplesBig from "../icons/OilStainsRipplesBig.svg";
 import OilStainsRipplesSmall from "../icons/OilStainsRipplesSmall.svg";
 
-export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
+type Props = {
+  loggedIn: boolean;
+  setLoggedIn: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function SideBar({ loggedIn, setLoggedIn }: Props) {
   const navigate = useNavigate();
 
   const { speed, outsideTemp, odo } = useContext(CarInfoContext);
@@ -71,7 +81,7 @@ export default function SideBar({ loggedIn, setLoggedIn }: SideBarProps) {
             className={`${style.item} ${style.speed}`}
             style={{ position: "relative" }}
           >
-            {speed || 0}
+            {(speed && speed![speed.length - 1].degree) || 0}
           </div>
           <div className={style.itemName}>Speed</div>
         </div>

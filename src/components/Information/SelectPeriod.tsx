@@ -5,7 +5,7 @@ import {
   initialOilInfoOfHalfYear,
   oilInfoOfYear,
 } from "../../models/chartData.ts";
-import style from "../../styles/OilInfo.module.scss";
+import style from "../../styles/CarInfo.module.scss";
 
 type Props = {
   period: string;
@@ -20,21 +20,19 @@ export default function SelectPeriod({
   setIsSelectedPeriod,
   setOilInfo,
 }: Props) {
-  const update = () => {
-    setIsSelectedPeriod(period);
-    if (period === "Year" || period === "Month") {
-      setOilInfo(oilInfoOfYear);
-    } else if (period === "Half Year") {
-      setOilInfo(initialOilInfoOfHalfYear);
-    } else {
-      setOilInfo([]);
-    }
-  };
-
   return (
     <div
       className={style.underline}
-      onClick={update}
+      onClick={() => {
+        setIsSelectedPeriod(period);
+        if (period === "Year" || period === "Month") {
+          setOilInfo(oilInfoOfYear);
+        } else if (period === "Half Year") {
+          setOilInfo(initialOilInfoOfHalfYear);
+        } else {
+          setOilInfo([]);
+        }
+      }}
       aria-selected={isSelectedPeriod === period}
     >
       {period}

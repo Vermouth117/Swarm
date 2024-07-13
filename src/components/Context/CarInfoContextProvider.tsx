@@ -16,8 +16,8 @@ export type CarInfoContextType = Readonly<{
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>;
   rpm: chartData[] | undefined;
   setRpm: Dispatch<SetStateAction<chartData[] | undefined>>;
-  speed: number | undefined;
-  setSpeed: Dispatch<SetStateAction<number | undefined>>;
+  speed: chartData[] | undefined;
+  setSpeed: Dispatch<SetStateAction<chartData[] | undefined>>;
   waterTemp: number | undefined;
   setWaterTemp: Dispatch<SetStateAction<number | undefined>>;
   outsideTemp: number | undefined;
@@ -92,7 +92,7 @@ export const CarInfoContext = createContext<CarInfoContextType>({
 export const CarInfoContextProvider: FC<Props> = ({ children }) => {
   const [device, setDevice] = useState<BluetoothDevice>();
   const [rpm, setRpm] = useState<chartData[]>();
-  const [speed, setSpeed] = useState<number>();
+  const [speed, setSpeed] = useState<chartData[]>();
   const [waterTemp, setWaterTemp] = useState<number>();
   const [outsideTemp, setOutsideTemp] = useState<number>();
   const [fuelConsumption, setFuelConsumption] = useState<number>();

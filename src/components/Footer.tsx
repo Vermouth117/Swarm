@@ -30,9 +30,9 @@ export default function Footer() {
       </div>
       <div
         className={style.icon}
-        aria-selected={location.pathname === "/oilInfo"}
+        aria-selected={location.pathname === "/carInfo"}
         onClick={() => {
-          navigate("/oilInfo", {
+          navigate("/carInfo", {
             state: { loggedIn: location.state.loggedIn },
           });
         }}

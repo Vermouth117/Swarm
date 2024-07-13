@@ -5,7 +5,7 @@ import { chartData } from "../models/chartData.ts";
 export const connectToELM327 = async (
   setDevice: Dispatch<SetStateAction<BluetoothDevice | undefined>>,
   setRpm: Dispatch<SetStateAction<chartData[] | undefined>>,
-  setSpeed: Dispatch<SetStateAction<number | undefined>>,
+  setSpeed: Dispatch<SetStateAction<chartData[] | undefined>>,
   setWaterTemp: Dispatch<SetStateAction<number | undefined>>,
   setOutsideTemp: Dispatch<SetStateAction<number | undefined>>,
   setFuelConsumption: Dispatch<SetStateAction<number | undefined>>,
@@ -38,6 +38,8 @@ export const connectToELM327 = async (
       const value = new TextDecoder().decode(target.value!); // new TextDecoder() デフォルト utf-8 or utf8
       console.log("Received value:", value);
 
+      const date = new Date();
+
       // 41 = 現在のデータを表示（レスポンス）
       if (value.includes("41 0C")) {
         const hexValues = value.split(" ");
@@ -45,31 +47,17 @@ export const connectToELM327 = async (
         const A = parseInt(hexValues[2], 16);
         const B = parseInt(hexValues[3], 16);
         const rpmValue = (256 * A + B) / 4;
-        const date = new Date();
+        const rpmData = {
+          date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
+          degree: Number(rpmValue.toFixed(0)),
+        };
         setRpm((prevRpm) => {
           if (prevRpm && prevRpm?.length >= 20) {
-            return [
-              ...prevRpm.slice(1),
-              {
-                date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
-                degree: Number(rpmValue.toFixed(0)),
-              },
-            ];
+            return [...prevRpm.slice(1), rpmData];
           } else if (prevRpm) {
-            return [
-              ...prevRpm,
-              {
-                date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
-                degree: Number(rpmValue.toFixed(0)),
-              },
-            ];
+            return [...prevRpm, rpmData];
           }
-          return [
-            {
-              date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
-              degree: Number(rpmValue.toFixed(0)),
-            },
-          ];
+          return [rpmData];
         });
         // setRpm(Number(rpmValue.toFixed(0)));
       }
@@ -77,7 +65,19 @@ export const connectToELM327 = async (
       if (value.includes("41 0D")) {
         const hexValues = value.split(" ");
         console.log("SPEED_hexValues", hexValues);
-        setSpeed(parseInt(hexValues[2], 16));
+        const speedData = {
+          date: `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`,
+          degree: Number(parseInt(hexValues[2], 16).toFixed(0)),
+        };
+        setSpeed((prevSpeed) => {
+          if (prevSpeed && prevSpeed?.length >= 20) {
+            return [...prevSpeed.slice(1), speedData];
+          } else if (prevSpeed) {
+            return [...prevSpeed, speedData];
+          }
+          return [speedData];
+        });
+        // setSpeed(parseInt(hexValues[2], 16));
       }
 
       if (value.includes("41 05")) {
@@ -207,4 +207,19 @@ export const sendCommand = async (device: BluetoothDevice, command: string) => {
   } catch (error) {
     console.error("コマンド送信に失敗しました", error);
   }
+};
+
+export const sendCommandInterval = (
+  device: BluetoothDevice,
+  command: string,
+  timeout: number,
+) => {
+  setInterval(async () => {
+    await sendCommand(device, command);
+    // await sendCommand(device, "012F");
+    // await sendCommand(device, "0123");
+    // await sendCommand(device, "010B");
+    // await sendCommand(device, "015A");
+    // await sendCommand(device, "0199");
+  }, timeout);
 };

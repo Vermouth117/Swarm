@@ -1,9 +1,7 @@
-@use "functions/mixin" as *;
-
 .iframeSection {
-  height: calc(100svh - 170px);
   display: flex;
   flex-direction: column;
+  height: calc(100svh - 170px);
   border: none;
 }
 

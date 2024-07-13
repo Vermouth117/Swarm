@@ -5,7 +5,7 @@ const isLocal = import.meta.env.VITE_APP_ISLOCAL;
 
 export default function Voice() {
   return (
-    <section className={styles.iframeSection}>
+    <article className={styles.iframeSection}>
       <div>
         <iframe
           src={
@@ -21,6 +21,6 @@ export default function Voice() {
         ></iframe>
       </div>
       <Footer />
-    </section>
+    </article>
   );
 }
