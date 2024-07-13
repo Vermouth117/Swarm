@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Chart from "./Chart.tsx";
 import Footer from "../Footer.tsx";

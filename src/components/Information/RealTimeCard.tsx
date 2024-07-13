@@ -7,7 +7,7 @@ type Props = {
   value: number;
   unit: string;
   setViewItemName: Dispatch<SetStateAction<string>>;
-  setShowChartCat?: Dispatch<SetStateAction<string>>;
+  setShowChartCat?: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export default function RealTimeCard({

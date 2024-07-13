@@ -83,60 +83,70 @@ export default function RealTime({ viewItemName, setViewItemName }: Props) {
             value={waterTemp || 0}
             unit={"℃"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Outside temp"}
             value={outsideTemp || 0}
             unit={"℃"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Fuel consumption"}
             value={fuelConsumption || 0}
             unit={"L/h"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"ODO"}
             value={odo || 0}
             unit={"km"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Throttle position"}
             value={throttlePosition || 0}
             unit={"％"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Voltage"}
             value={voltage || 0}
             unit={"V"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Time from engine start"}
             value={timeFromEngineStart || 0}
             unit={"sec"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Oil temp"}
             value={oilTemp || 0}
             unit={"℃"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Engine load"}
             value={engineLoad || 0}
             unit={"％"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           <RealTimeCard
             title={"Absolute pressure"}
             value={absolutePressure || 0}
             unit={"kPa"}
             setViewItemName={setViewItemName}
+            setShowChartCat={setShowChartCat}
           />
           {/*<RealTimeCard*/}
           {/*  title={"Fuel tank level"}*/}
